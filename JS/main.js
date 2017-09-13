@@ -11,11 +11,42 @@ context.canvas.height = window.innerHeight;
 var startFrameMillis = Date.now();
 var endFrameMillis = Date.now();
 
-function main(DeltaTime)
-{
+var BaseImage = document.createElement("img");
+    BaseImage.src = "Resources/PonyOne.png";
 
+var DefX = 130;
+var Multiply = 0;
+var Timer = 0.1;
+var ResetTimer = Timer;
+
+var TX = 100;
+var TY = 100;
+
+var TileWidth  = 130;
+var TileHeight = 130;
+
+
+
+function run()
+{
+    main(getDeltaTime());
 }
 
+function main(DeltaTime)
+{
+    if(Timer <= 0)
+    {
+        var MutlipleX  = Multiply > 8 ? TileWidth * 0 : TileWidth * Multiply;
+        var MultipleY = 0;
+        Multiply = Multiply > 8 ? 0 : Multiply + 1;    
+        context.drawImage(BaseImage,MutlipleX,MultipleY,TX,TY,TileWidth,TileHeight, TileWidth * 2, TileHeight * 2);
+        Timer = ResetTimer;
+    }
+    else
+    {
+        Timer -= DeltaTime;
+    }
+}
 
 
 // Deltatime and other Utils
@@ -31,26 +62,26 @@ function getDeltaTime()
 		
 	return deltaTime;
 }
-// Refresh 
 (function() {
-    var onEachFrame;
-    if (window.requestAnimationFrame) {
-    onEachFrame = function(cb) {
-    var _cb = function() { cb(); window.requestAnimationFrame(_cb); }
-    _cb();
-    };
-    } else if (window.mozRequestAnimationFrame) {
-    onEachFrame = function(cb) {
-    var _cb = function() { cb();
-   window.mozRequestAnimationFrame(_cb); }
-    _cb();
-    };
-    } else {
-    onEachFrame = function(cb) {
-    setInterval(cb, 1000 / 60);
-    }
-    }
-   
-    window.onEachFrame = onEachFrame;
-   })();
-   window.onEachFrame(main(getDeltaTime()));
+ var onEachFrame;
+ if (window.requestAnimationFrame) {
+ onEachFrame = function(cb) {
+ var _cb = function() { cb(); window.requestAnimationFrame(_cb); }
+ _cb();
+ };
+ } else if (window.mozRequestAnimationFrame) {
+ onEachFrame = function(cb) {
+ var _cb = function() { cb();
+window.mozRequestAnimationFrame(_cb); }
+ _cb();
+ };
+ } else {
+ onEachFrame = function(cb) {
+ setInterval(cb, 1000 / 60);
+ }
+ }
+
+ window.onEachFrame = onEachFrame;
+})();
+window.onEachFrame(run);
+//
