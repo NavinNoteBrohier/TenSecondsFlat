@@ -19,13 +19,14 @@ var Multiply = 0;
 var Timer = 0.1;
 var ResetTimer = Timer;
 
-var TX = 100;
-var TY = 100;
+var TX = 128;
+var TY = 128;
 
-var TileWidth  = 130;
-var TileHeight = 130;
+var TileWidth  = 128;
+var TileHeight = 128;
 
-
+var PonyBase = new SpriteUtility();
+PonyBase.RenderSprite();
 
 function run()
 {
@@ -40,6 +41,7 @@ function main(DeltaTime)
         var MultipleY = 0;
         Multiply = Multiply > 8 ? 0 : Multiply + 1;    
         context.drawImage(BaseImage,MutlipleX,MultipleY,TX,TY,TileWidth,TileHeight, TileWidth * 2, TileHeight * 2);
+        
         Timer = ResetTimer;
     }
     else
