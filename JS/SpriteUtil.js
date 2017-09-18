@@ -8,17 +8,20 @@ var SpriteUtility = function()
     this.m_PosX = 0;
     this.m_posY = 0;
 
-
+    this.Sprites = new SpriteSheet();
 
     this.init = function()
     {
+        this.Sprites.init();
 
+        this.m_Initialized = true;
     }
 
 // Sprite Sheet data
     this.SpriteSheet = function()
     {
-        this.m_SpritePath = "";
+        this.m_Initialized = false;
+        this.m_SpritePath = "Resources/PonyOne.png";
         this.m_spritesheet = document.createElement("img");
         this.m_spritesheet.src = this.m_SpritePath; 
         this.m_TileWidth = 0;
@@ -28,7 +31,12 @@ var SpriteUtility = function()
 
         this.m_Initialize = function(a_Filepath,a_Tilewidth,a_TileHeight,a_Rows,a_Columns)
         {
-            
+            this.m_SpritePath = a_Filepath;
+            this.m_TileWidth = a_Tilewidth;
+            this.m_TileHeight = a_TileHeight;
+            this.m_Row = a_Rows;
+            this.m_Col = a_Columns;
+            this.m_Initialized = true;
         }
     }
 
@@ -59,14 +67,15 @@ var SpriteUtility = function()
 
     this.RenderSprite = function(DeltaTime,Frames)
     {
-        try
+        if(!this.m_Initialized || !this.Sprites.m_Initialized)
         {
-            context.drawImage(this.m_spritesheet,this.m_Row,this.m_Col,this.m_TileWidth,this.m_TileHeight,this.m_PosX,this.m_PosY,this.m_ScaleX,this.m_scaleY);
+            console.log("Render Sprite function has encountered an error. Please check variables.");
+            return;            
+
         }
-        catch(err)
-        {
-            document.write("Render Sprite function has encountered an error. Please check variables.");
-        }
+           
+        context.drawImage(Sprites.m_SpritePath,);
+
     }
 
 };

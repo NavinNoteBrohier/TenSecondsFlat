@@ -2,6 +2,8 @@ var canvas = document.getElementById("Canvas");
 var context = canvas.getContext("2d");
 
 //Gobal Variables
+
+    //Context Variables
 var WindowWidth = context.canvas.width;
 var WindowHeight = context.canvas.height;
 
@@ -10,9 +12,13 @@ context.canvas.height = window.innerHeight;
 
 var startFrameMillis = Date.now();
 var endFrameMillis = Date.now();
+    //
 
+    // Game Variables
 var BaseImage = document.createElement("img");
     BaseImage.src = "Resources/PonyOne.png";
+
+var init = false;
 
 var DefX = 130;
 var Multiply = 0;
@@ -26,15 +32,27 @@ var TileWidth  = 128;
 var TileHeight = 128;
 
 var PonyBase = new SpriteUtility();
-PonyBase.RenderSprite();
+    //
+//
 
 function run()
 {
+
+    if(!init)
+    {
+
+      // Do all Inits here 
+      Init();
+      return;
+    }
+
     main(getDeltaTime());
 }
 
 function main(DeltaTime)
 {
+    PonyBase.RenderSprite(DeltaTime);
+
     if(Timer <= 0)
     {
         var MutlipleX  = Multiply > 8 ? TileWidth * 0 : TileWidth * Multiply;
@@ -50,6 +68,14 @@ function main(DeltaTime)
     }
 }
 
+function Init()
+{
+
+
+
+    
+    init = true;
+}
 
 // Deltatime and other Utils
 function getDeltaTime()
