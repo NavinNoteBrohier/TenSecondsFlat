@@ -12,7 +12,7 @@ var SpriteUtility = function()
 
     this.init = function()
     {
-        this.Sprites.init();
+        this.Sprites.m_Initialize();
 
         this.m_Initialized = true;
     }
@@ -29,6 +29,8 @@ var SpriteUtility = function()
         this.m_Row = 0;
         this.m_Col = 0;
 
+        this.SpriteFrames = new frame();
+
         this.m_Initialize = function(a_Filepath,a_Tilewidth,a_TileHeight,a_Rows,a_Columns)
         {
             this.m_SpritePath = a_Filepath;
@@ -36,7 +38,10 @@ var SpriteUtility = function()
             this.m_TileHeight = a_TileHeight;
             this.m_Row = a_Rows;
             this.m_Col = a_Columns;
+            this.SpriteFrames.createFrame(m_TileWidth,m_TileHeight,m_Row,m_Col);
             this.m_Initialized = true;
+
+            
         }
     }
 
@@ -49,7 +54,7 @@ var SpriteUtility = function()
         this.m_Row = 0;
         this.m_Col = 0;
 
-        this.createFrame = function()
+        this.createFrame = function(a_Tilewidth,a_TileHeight,a_Rows,a_Cols)
         {
 
         }
