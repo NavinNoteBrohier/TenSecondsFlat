@@ -31,7 +31,7 @@ var TY = 128;
 var TileWidth  = 128;
 var TileHeight = 128;
 
-var PonyBase = new SpriteUtility();
+var PonyBase = new SpriteUtilityScript("Resources/PonyOne.png");
     //
 //
 
@@ -51,14 +51,14 @@ function run()
 
 function main(DeltaTime)
 {
-    PonyBase.RenderSprite(DeltaTime);
+   
 
     if(Timer <= 0)
     {
         var MutlipleX  = Multiply > 8 ? TileWidth * 0 : TileWidth * Multiply;
         var MultipleY = 0;
         Multiply = Multiply > 8 ? 0 : Multiply + 1;    
-        context.drawImage(BaseImage,MutlipleX,MultipleY,TX,TY,TileWidth,TileHeight, TileWidth * 2, TileHeight * 2);
+        context.drawImage(BaseImage,MutlipleX,MultipleY,TX,TY,TileWidth,TileHeight, TileWidth * 1, TileHeight * 1);
         
         Timer = ResetTimer;
     }
